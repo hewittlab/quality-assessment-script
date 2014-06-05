@@ -1,6 +1,8 @@
 import csv
 import sys
 
+COLUMNS_TO_CHECK = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17] #The columns of the input files to be compared. Can contain the numbers 2 to 17 inclusive.
+
 def printDiff(l, index):
 	st = "["
 	for i in range(len(l)):
@@ -57,7 +59,7 @@ for f in files:
 							output.append([t1, f.name, g.name])
 
 					indexes = []
-					for i in [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]: #The columns of the input files to be compared. Can contain the numbers 2 to 17 inclusive.
+					for i in COLUMNS_TO_CHECK:
 						if tsv1[r1][i] != tsv2[r2][i]:
 							indexes.append(i)
 					if len(indexes) > 0:
