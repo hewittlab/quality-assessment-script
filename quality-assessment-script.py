@@ -25,9 +25,13 @@ file_paths = sys.argv[1:]
 files = map(open, file_paths)
 output = []
 
+comparisons = []
+
 for f in files:
 	for g in files:
-		if f <> g:
+		if f <> g and ((f.name,g.name) not in comparisons and (g.name,f.name) not in comparisons):
+			comparisons.append((f.name, g.name))
+			print comparisons
 			print "\n" + f.name + " VS " + g.name + "\n"
 			f.seek(0)
 			g.seek(0)
@@ -86,11 +90,14 @@ for f in files:
 					print printDiff(tsv1[r1], [1]) + "\n" + printDiff(tsv2[r2], [1]) + "\n-------------------------"
 					r2 = r2 + 1
 					continue;
+						
+			print "Number of differences: " + str(num_diffs)
+			print "Number of different SNPs: " + str(snp_diffs)
 
 for o in output:
 	print  (len(o)-1)/len(files)
 	if (len(o)-1)/len(files) >= 0.75:
 		print o
 		
-print "Number of differnces: " + str(num_diffs)
-print "Number of different SNPs: " + str(snp_diffs)
+# print "Number of differences: " + str(num_diffs)
+# print "Number of different SNPs: " + str(snp_diffs)
